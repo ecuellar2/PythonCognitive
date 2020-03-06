@@ -1,36 +1,40 @@
-print("Time to have fun with python and sentiment analysis ")
+print("starting ")
+#Know location such as  C:\Users\xxx\AppData\Local\Programs\Python\Python38-32
+#python.exe -m pip install azure-ai-textanalytics
 
-import urllib.request
-import json
-import xlrd
+key = "xx"
+endpoint = "xx"
 
-# Configure API access
-apiKey = 'xxxxxx'
-sentimentUri = 'https://regiongoeshere.api.cognitive.microsoft.com/text/analytics/versionnumbergoeshere/sentiment'
-# This data set was all English
-language = 'en'
-headers = {}
-headers['Ocp-Apim-Subscription-Key'] = apiKey
-headers['Content-Type'] = 'application/json'
-headers['Accept'] = 'application/json'
+from azure.ai.textanalytics import TextAnalyticsClient, TextAnalyticsApiKeyCredential
 
-rec_id = '1'        
-sampleText = 'blah'
-# In this case had table export from RDBMS into Excel file. Excel file had 2 columns, primary key and text.
-book = xlrd.open_workbook('sentiment1.xlsx')
-f = open('output1.txt','w') // for now going to write output of sentiment API into a flat file
-sheet = book.sheet_by_index(0)
-for rownum in range(sheet.nrows):
-    rec_id = sheet.cell(rownum,0).value
-    sampleText = sheet.cell(rownum,1).value
-    # Determine sentiment
-    postData2 = json.dumps({"documents":[{"id":rec_id, "language":language, "text":sampleText}]}).encode('utf-8')
-    request2 = urllib.request.Request(sentimentUri, postData2, headers)
-    response2 = urllib.request.urlopen(request2)
-    response2json = json.loads(response2.read().decode('utf-8'))
-    sentiment = response2json['documents'][0]['score']
-    f.write('\n' +str(rec_id)+":::"+str(sentiment))
-    #I now have the sentiment for each primary key in my file
+def authenticate_client():
+    ta_credential = TextAnalyticsApiKeyCredential(key)
+    text_analytics_client = TextAnalyticsClient(
+    endpoint=endpoint, credential=ta_credential)
+    return text_analytics_client
 
-f.close()
-print("All done folks")
+client = authenticate_client()
+
+def sentiment_analysis_example(client):
+
+    document = ["I had the best day of my life. I wish you were there with me."]
+    response = client.analyze_sentiment(inputs=document)[0]
+    print("Document Sentiment: {}".format(response.sentiment))
+    print("Overall scores: positive={0:.3f}; neutral={1:.3f}; negative={2:.3f} \n".format(
+        response.sentiment_scores.positive,
+        response.sentiment_scores.neutral,
+        response.sentiment_scores.negative,
+    ))
+
+    #for idx, sentence in enumerate(response.sentences):
+    #    print("[Offset: {}, Length: {}]".format(sentence.offset, sentence.length))
+    #    print("Sentence {} sentiment: {}".format(idx+1, sentence.sentiment))
+    #    print("Sentence score:\nPositive={0:.3f}\nNeutral={1:.3f}\nNegative={2:.3f}\n".format(
+    #        sentence.sentiment_scores.positive,
+    #        sentence.sentiment_scores.neutral,
+    #        sentence.sentiment_scores.negative,
+    #    ))
+
+sentiment_analysis_example(client)
+
+print("All done")
