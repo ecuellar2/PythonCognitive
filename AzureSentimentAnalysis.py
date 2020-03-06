@@ -1,6 +1,9 @@
 print("starting ")
 #Know location such as  C:\Users\xxx\AppData\Local\Programs\Python\Python38-32
 #python.exe -m pip install azure-ai-textanalytics
+#references
+#https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/quickstarts/text-analytics-sdk?tabs=version-3&pivots=programming-language-python
+#https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/how-tos/text-analytics-how-to-sentiment-analysis?tabs=version-3
 
 key = "xx"
 endpoint = "xx"
