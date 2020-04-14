@@ -13,12 +13,22 @@ print("starting ")
 
 key = "xx"
 endpoint = "https://southcentralus.api.cognitive.microsoft.com/bing/v7.0/search?"
-
 #curl -X GET "https://southcentralus.api.cognitive.microsoft.com/bing/v7.0/search?q=metallica" -H "Ocp-Apim-Subscription-Key: xxx" -H "Content-Type: application/json"
-
 client = WebSearchClient(endpoint, CognitiveServicesCredentials(key))
-web_data = client.web.search(query="Yosemite")
+search_string = "Yosemite"
 
+#count parameter impacts web_data.web_pages.value number of results returned 
+#if 10 results per page, then increment offset by 10 (for example, 0, 10, 20)  each subsequent page
+#web_data = client.web.search(query=search_string,  offset=10, count=20)
+
+# response_filter and freshness
+#web_data = client.web.search(query=search_string, response_filter=["News"], freshness="Day")
+
+# The answers that you want to promote do not count against the answerCount limit
+# For example, if the ranked answers are news, images, and videos, and you set 
+# answerCount to 1 and promote to news, the response contains news and images. 
+# 'Off', 'Moderate', 'Strict'
+web_data = client.web.search(query=search_string, answer_count=2,promote=["videos"],safe_search="Off")
 
 print("sent search query ")
 '''
