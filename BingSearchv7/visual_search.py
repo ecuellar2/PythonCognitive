@@ -1,5 +1,7 @@
 #https://github.com/MicrosoftDocs/azure-docs/blob/master/articles/cognitive-services/bing-visual-search/includes/quickstarts/visual-search-client-library-python.md
 #python -m pip install azure-cognitiveservices-search-visualsearch
+#https://github.com/Azure-Samples/cognitive-services-python-sdk-samples/blob/master/samples/search/visual_search_samples.py
+
 
 import http.client, urllib.parse
 import json
