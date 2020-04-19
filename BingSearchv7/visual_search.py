@@ -25,7 +25,10 @@ def print_json(obj):
 
 subscription_key =  ""
 endpoint_string = "https://southcentralus.api.cognitive.microsoft.com/bing/v7.0/search?"
-
+'''
+The Visual Search client library enables you to find images online from previous searches that return an ImageInsightsToken. 
+You send the ImageInsightsToken to Bing and it returns results that include Bing Search URLs and URLs of similar images found online.
+'''
 PATH = 'C:\\code\\images\\'
 image_path = os.path.join(PATH, "cat.jpg")
 client = VisualSearchClient(endpoint=endpoint_string, credentials=CognitiveServicesCredentials(subscription_key))
