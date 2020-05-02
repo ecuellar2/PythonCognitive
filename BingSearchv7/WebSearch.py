@@ -11,7 +11,7 @@ from msrest.authentication import CognitiveServicesCredentials
 
 print("starting ")
 
-key = "xx"
+key = ""
 endpoint = "https://southcentralus.api.cognitive.microsoft.com/bing/v7.0/search?"
 #curl -X GET "https://southcentralus.api.cognitive.microsoft.com/bing/v7.0/search?q=metallica" -H "Ocp-Apim-Subscription-Key: xxx" -H "Content-Type: application/json"
 client = WebSearchClient(endpoint, CognitiveServicesCredentials(key))
@@ -37,10 +37,8 @@ If the search response contains web pages, the first result's name and url
 are printed.
 '''
 
-if hasattr(web_data.web_pages, 'value'):
-
+if web_data.web_pages.value:
     print("\r\nWebpage Results#{}".format(len(web_data.web_pages.value)))
-
     first_web_page = web_data.web_pages.value[0]
     print("First web page name: {} ".format(first_web_page.name))
     print("First web page URL: {} ".format(first_web_page.url))
@@ -48,16 +46,14 @@ if hasattr(web_data.web_pages, 'value'):
 else:
     print("Didn't find any web pages...")
 
-
 '''
 Images
 If the search response contains images, the first result's name and url
 are printed.
 '''
 if hasattr(web_data.images, 'value'):
-
+#if web_data.images.value:
     print("\r\nImage Results#{}".format(len(web_data.images.value)))
-
     first_image = web_data.images.value[0]
     print("First Image name: {} ".format(first_image.name))
     print("First Image URL: {} ".format(first_image.url))
