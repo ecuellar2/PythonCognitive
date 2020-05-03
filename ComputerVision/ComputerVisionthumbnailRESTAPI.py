@@ -30,6 +30,6 @@ plt.imshow(thumbnail)
 
 plt.axis("off")
 print("Thumbnail is {0}-by-{1}".format(*thumbnail.size))
-
+plt.show()
 print("done")
 
