@@ -14,7 +14,17 @@ from PIL import Image
 from io import BytesIO
 
 print("starting ")
+'''
+The Read API detects text content in an image using our latest recognition models and converts the identified text into a 
+machine-readable character stream. It's optimized for text-heavy images (such as documents that have been digitally scanned)
+ and for images with a lot of visual noise. It will determine which recognition model to use for each line of text, 
+ supporting images with both printed and handwritten text. The Read API executes asynchronously because larger 
+ documents can take several minutes to return a result.
 
+The Read operation maintains the original line groupings of recognized words in its output. Each line comes with 
+bounding box coordinates, and each word within the line also has its own coordinates. If a word was recognized with 
+low confidence, that information is conveyed as well. 
+'''
 key = ""
 endpoint = "https://southcentralus.api.cognitive.microsoft.com/vision/v3.0-preview/read/analyze?"
 image_url = "https://upload.wikimedia.org/wikipedia/commons/d/dd/Cursive_Writing_on_Notebook_paper.jpg"
@@ -61,6 +71,5 @@ for polygon in polygons:
     plt.text(vertices[0][0], vertices[0][1], text, fontsize=20, va="top")
 plt.show()
 
-#plt.show()
 print("done")
 
