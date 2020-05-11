@@ -40,16 +40,20 @@ pprint(screen.as_dict())
 
 body_input = Body(name='Term list name', description='Term list description')
 # needs work here !!!
-custom_list = client.list_management_term_lists.create(content_type='application/json', body=body_input)
-'''
+#custom_list = client.list_management_term_lists.create(content_type='application/json', body=body_input)
+
 custom_list = client.list_management_term_lists.create(
     content_type="application/json",
     body={
         "name": "Term list name",
         "description": "Term list description",
+        "metadata": {
+        "one": "Acceptable",
+        "two": "TWO"
+        }
     }
 )
-'''
+
 
 #pprint(custom_list.as_dict())
 #list_id = custom_list.id
