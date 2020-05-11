@@ -1,6 +1,7 @@
 #python -m pip install azure-cognitiveservices-vision-contentmoderator
 #pip install --upgrade azure-cognitiveservices-vision-contentmoderator
 #https://docs.microsoft.com/en-us/azure/cognitive-services/Content-Moderator/client-libraries?pivots=programming-language-python#use-a-custom-image-list
+#https://github.com/Azure-Samples/cognitive-services-content-moderator-samples/blob/master/documentation-samples/python/content_moderator_quickstart.py
 
 import os.path
 from pprint import pprint
@@ -21,7 +22,7 @@ from azure.cognitiveservices.vision.contentmoderator.models import (
 from msrest.authentication import CognitiveServicesCredentials
 
 print("starting ")
-## custom list raises bad request here as well as text moderator
+
 key = ""
 endpoint_string = "https://southcentralus.api.cognitive.microsoft.com/"
 client = ContentModeratorClient(endpoint=endpoint_string,credentials=CognitiveServicesCredentials(key))
