@@ -1,6 +1,6 @@
 # python -m pip install azure-cognitiveservices-language-luis
 # https://docs.microsoft.com/en-us/azure/cognitive-services/luis/sdk-authoring?tabs=windows&pivots=programming-language-python
-
+# https://www.luis.ai
 print("starting ")
 from azure.cognitiveservices.language.luis.authoring import LUISAuthoringClient
 from azure.cognitiveservices.language.luis.runtime import LUISRuntimeClient
