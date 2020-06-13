@@ -94,19 +94,27 @@ print("Application published. Endpoint URL: " + responseEndpointInfo.endpoint_ur
 
 '''
 https://westus.api.cognitive.microsoft.com/luis/prediction/v3.0/apps/app_id/slots/staging/predict?subscription-key=xxxx&verbose=true&show-all-intents=true&log=true&query=find flights business class to austin
-
+https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/xxx?subscription-key=xxxx&q=find flights from seattle to london in first class
 '''
 request = { "query" : "Find business class flight to Austin" }
 # Instantiate a LUIS runtime client
 clientRuntime = LUISRuntimeClient(endpoint_string, CognitiveServicesCredentials(key))
 
 # Note be sure to specify, using the slot_name parameter, whether your application is in staging or production.
-response = clientRuntime.prediction.get_slot_prediction(app_id=app_id, slot_name="staging", prediction_request=request)
+#botbuilder-ai 4.9.1 has requirement azure-cognitiveservices-language-luis==0.2.0
+#have azure-cognitiveservices-language-luis 0.6.0 which is incompatible, need .6 for get_slot_prediction()
+#response = clientRuntime.prediction.get_slot_prediction(app_id=app_id, slot_name="staging", prediction_request=request)
+request2 = "find flights from seattle to london in first class" 
+response = clientRuntime.prediction.resolve(app_id=app_id, query=request2)  #using .2 api
+print (response)
+'''
+#reponse from .6 API
 print("Top intent: {}".format(response.prediction.top_intent))
 print("Sentiment: {}".format (response.prediction.sentiment))
 print("Intents: ")
 for intent in response.prediction.intents:
 	print("\t{}".format (json.dumps (intent)))
 	print("Entities: {}".format (response.prediction.entities))
-
+'''
 print("Done ")
+
