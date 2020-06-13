@@ -1,0 +1,36 @@
+https://github.com/microsoft/BotBuilder-Samples/tree/master/samples/python/14.nlp-with-dispatch
+https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-tutorial-basic-deploy?view=azure-bot-service-4.0&tabs=python%2Ccsharp
+https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0&tabs=python
+
+C:\Python\Python38-32\Scripts\cookiecutter https://github.com/microsoft/botbuilder-python/releases/download/Templates/echo.zip
+
+C:\Python\Python38-32\python -m pip install cookiecutter
+C:\Python\Python38-32\python -m pip install botbuilder-core
+C:\Python\Python38-32\python -m pip install asyncio
+C:\Python\Python38-32\python -m pip install aiohttp
+C:\Python\Python38-32\python -m pip install botbuilder-ai
+
+Need to publish to production slot for LUIS to be called from bot.
+
+https://www.luis.ai/
+https://www.qnamaker.ai/
+http://localhost:3978/api/messages
+find flights from seattle to london in first class
+How do I manage my knowledgebase?
+
+config.py
+class DefaultConfig:
+    """ Bot Configuration """
+
+    PORT = 3978
+    APP_ID = os.environ.get("MicrosoftAppId", "")
+    APP_PASSWORD = os.environ.get("MicrosoftAppPassword", "")
+
+    QNA_ENDPOINT_KEY = "
+    QNA_KNOWLEDGEBASE_ID = ""
+    QNA_ENDPOINT_HOST   = "https://xxx.azurewebsites.net/qnamaker"
+
+
+    LUIS_API_HOST_NAME ="westus.api.cognitive.microsoft.com/"
+    LUIS_APP_ID = ""
+    LUIS_API_KEY = ""
