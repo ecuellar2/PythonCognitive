@@ -11,7 +11,7 @@ print("starting ")
 
 index_name = "cogsrch-py-index"   # hotels-sample-index
 indexer_name = "cogsrch-py-indexer"  # hotels-sample-indexer
-storage_string = "DefaultEndpointsProtocol=https;AccountName=cogecstorage;AccountKey=MCObIPz9qWbU+MHFpXyw66+6UZT6ulhn8HYD8vghdJ41BuLEsb+iNsIvXi1NVH3k0LDvaY0kI9i1ou1SFBUVyg==;EndpointSuffix=core.windows.net"
+storage_string = ""
 
 endpoint = "https://xx.search.windows.net/"
 headers = {'Content-Type': 'application/json',
