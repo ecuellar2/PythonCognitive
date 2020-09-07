@@ -41,6 +41,22 @@
 @ phraselist pl_1(interchangeable)   = 
 	- temp1
 
+> # PREBUILT Entity definitions
+@ prebuilt datetimeV2 
+@ prebuilt number 
+
+@ ml entityData 
+@ entityData =
+>    - @ ml entityDataLocation usesFeature sink1, sink2
+>    - @ datetimeV2 from-date   this makes field required
+    - @ ml sink11 usesFeature pl_1
+    - @ ml sink22 usesFeature pl_2
+    - @ tempa listzzzz
+    - @ ml data-filter
+        - @ ml daysBack usesFeature number
+        - @ ml numOfRecords usesFeature number
+        - @ ml fromDate usesFeature datetimeV2
+
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 > Reference to external .lu file for none intent
 [None intent definition](./none.lu)
