@@ -104,6 +104,7 @@ clientRuntime = LUISRuntimeClient(endpoint_string, CognitiveServicesCredentials(
 #botbuilder-ai 4.9.1 has requirement azure-cognitiveservices-language-luis==0.2.0
 #have azure-cognitiveservices-language-luis 0.6.0 which is incompatible, need .6 for get_slot_prediction()
 #response = clientRuntime.prediction.get_slot_prediction(app_id=app_id, slot_name="staging", prediction_request=request)
+#print(response.serialize())
 request2 = "find flights from seattle to london in first class" 
 response = clientRuntime.prediction.resolve(app_id=app_id, query=request2)  #using .2 api
 print (response)
@@ -116,5 +117,6 @@ for intent in response.prediction.intents:
 	print("\t{}".format (json.dumps (intent)))
 	print("Entities: {}".format (response.prediction.entities))
 '''
+
 print("Done ")
 
