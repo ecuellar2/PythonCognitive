@@ -1,0 +1,120 @@
+> !# @app.name = luis_poc2
+> !# @app.versionId = 1.0.0
+> !# @app.culture = en-us
+> !# @app.luis_schema_version = 7.0.0
+> !# @app.tokenizerVersion = 1.0.0
+
+> Intent definitions >>>>>>>>>>>>>>>>>>>>>>>>>>
+## AskForUserName
+> applies labels to the ml entity within utterance
+- my name is {@userName=john doe}
+- my first name is {@userName:firstName=bob}
+- my full name is {@userName:firstName=jane} {@userName:lastName=smith}
+
+> The entity "name" will appear as pattern.any with the role profile 
+> You define patterns by defining an entity in an utterance without a labeled value.
+# getUserName
+- call me {name:profile}
+- I'm {name:profile}
+
+# DeleteAlarm
+- delete the {@alarmTime=7AM} alarm
+- delete the {alarmTime} alarm
+
+
+> Example to label ML entity with children 
+# getUserProfile
+- my name is {@userProfile = {@firstName = mike}}
+- i'm {@userProfile = {@firstName = vishwac}}
+> To help label child entities, you can break up your labels:
+- my name is vishwac and I'm 36 years old
+    - my name is {@userProfile = vishwac and I'm 36 years old}
+    - my name is {@firstName = vishwac} and I'm 36 years old
+    - my name is vishwac and I'm {@userAge = 36} years old
+
+@ prebuilt personName
+@ ml userProfile
+    - @ personName firstName
+    - @ personName lastName
+
+
+> roles can be specified for list entity types as well 
+> in this case fromCity and toCity are auto added as roles to the 'city' list entity defined further below 
+## BookFlight
+- book flight from {city:fromCity} to {city:toCity}
+- [can you] get me a flight from {city:fromCity} to {city:toCity}
+- get me a flight to {city:toCity}
+- I need to fly from {city:fromCity}
+- I live in {@city:fromCity=Tacoma}
+
+> LIST entity type cannot be explicitly included in a labelled utterance unless the label includes a role.
+> The {} syntax without @ means it is creating pattern 
+
+> List entities >>>>>>>>>>>>>>>>>>>>>>>>>>
+> Seattle and Portland are normalized values and items listed are the synonyms
+@ list city hasRoles fromCity, toCity
+@ city = 
+    - Seattle :
+        - Seattle, Tacoma, SeaTac, SEA
+    - Portland :
+        - Portland, PDX
+
+> List entities represent a fixed, closed set of related words along with their synonyms, they are extracted using exact text match.
+>  Entities that require a definition, likes list and regular expressions entities use: @<entity-name> = <definition>
+
+>  Entity definitions >>>>>>>>>>>>>>>>>>>>>>>>>>
+>  entity type, entity name are required, and roles are optional
+>  @ <entity-type> <entity-name> [[hasRole[s]] <comma-separated-list-of-roles>] [hasFeature[s] <comma-separated-list-of-features>]
+
+>  A role is an alias for an entity
+@ ml userName hasRoles firstName, lastName
+@ ml alarmTime
+
+> PREBUILT Entity definitions >>>>>>>>>>>>>>>>>>>>>>>>>>
+@ prebuilt number hasRoles numOfRecords
+@ prebuilt datetimeV2 hasRoles  fromDate, toDate
+
+> phraseList are ML features  >>>>>>>>>>>>>>>>>>>>>>>>>>
+
+> Use a phrase list when you need your LUIS app to generalize and identify new items for the concept. 
+> Phrase lists are like domain-specific vocabulary. They enhance the quality of understanding or intents and entities.
+@ phraselist PLCity(interchangeable) = 
+	- seattle, space needle, SEATAC, SEA
+
+
+> By default phrase lists are enabled for all models. However when you explicitly start assigning phrase lists as a 
+> feature (descriptor) to other models, the specific phrase lists is not enabled for all models. 
+@ ml city2 usesFeature PLCity 
+
+> phrase list as feature to n-depth entity with phrase list as a feature
+> entity has 3 subentities, and location has a subentity (now 2 levels deep) 
+> phrase list is a feature to another model(entity):
+@ ml address hasRoles fromAddress, toAddress
+	
+@ address =
+    - @ number 'doornumber'
+    - @ ml streetName
+    - @ ml location
+    - @ ml city3 usesFeature PLCity
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+> example of how to add intents and entities as a feature with usesFeature
+
+
+@ prebuilt age
+@ ml userName2 hasRoles fistName2, lastName2
+
+> add entity as a feature to another entity
+@ userName2 usesFeature personName
+
+> multiple entities as a feature to a model
+@ intent getUserNameIntent usesFeature age, personName
+# getUserNameIntent
+- utterance examples here 
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+> RegEx entities  >>>>>>>>>>>>>>>>>>>>>>>>>>
+
+> Reference to external .lu file for none intent
+[None intent definition](./none.lu)
