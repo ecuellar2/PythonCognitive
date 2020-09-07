@@ -1,0 +1,46 @@
+> !# @app.name = sandbox
+> !# @app.versionId = 1.0.0
+> !# @app.culture = en-us
+> !# @app.luis_schema_version = 7.0.0
+> !# @app.tokenizerVersion = 1.0.0
+
+> Intent definitions >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+## intent1
+- status of {@zzzz=aaaa} in {@sink2=datadw}
+- status of {@yyyy=bbbb} in {@sink1=lake}
+- status of {@listzzzz:zzzz} in {sink1}
+
+## intent2
+- what is {@listyyyy:yyyy} [?]
+- what is {@listzzzz:zzzz} [?]
+- what is {@listxxxx:xxxx} [?]
+- what is {@zzzz=aaaa} 
+- what is {@yyyy=bbbb} 
+
+> patterns improve accuracy when several utterances are very similar. 
+> pattern allows you to gain more accuracy for intent without providing many more utterances.
+
+> List entities >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+@ list listzzzz = 
+    - aaaa :
+        - blah1, blah2
+
+@ list listyyyy = 
+    - bbbb :
+
+> Entities >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+@ listzzzz zzzz
+@ listyyyy yyyy
+@ listxxxx xxxx
+
+@ ml sink1 usesFeature pl_1
+@ ml sink2 usesFeature pl_2
+ 
+@ phraselist pl_2(interchangeable)   = 
+	- temp1
+@ phraselist pl_1(interchangeable)   = 
+	- temp2
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+> Reference to external .lu file for none intent
+[None intent definition](./none.lu)
