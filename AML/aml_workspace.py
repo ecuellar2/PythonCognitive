@@ -47,7 +47,7 @@ dataset.take(3).to_pandas_dataframe()
 #############
 # on prem use case  below 
 sql_datastore_name="onprem"
-server_name="sernamewithoutsuffix"  #domain suffix will go in endpoint parameter
+server_name="server_name_withoutsuffix"  #domain suffix will go in endpoint parameter
 database_name="db"
 username="user"
 password="x"
@@ -60,7 +60,7 @@ df = dataset.to_pandas_dataframe()
 print(df)
 
 ############################################
-# azure sql example below but can use UI in portal
+# azure sql example below but can use UI in portal to register azure sql
 sql_datastore_name="sql"
 server_name="xx.database.windows.net"
 database_name="db"
