@@ -27,10 +27,14 @@ kb_id = "grab from qnamaker.ai, KB, settings, "
 
 update_kb_operation_dto = UpdateKbOperationDTO(add=UpdateKbOperationDTOAdd(
     qna_list=[
-                QnADTO(questions=["bye"], answer="goodbye")
+                QnADTO(questions=["What is xxx?"], 
+                answer="The answer is xxx.",
+                metadata=[MetadataDTO(name="Location", value="Austin")]
+                )
             ]
         )
     )
+
 
 #update_op = client.knowledgebase.update(kb_id=kb_id, update_kb=update_kb_operation_dto)
 #print (update_op.operation_id)
