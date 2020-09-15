@@ -17,15 +17,13 @@ from msrest.authentication import CognitiveServicesCredentials
 
 print("starting ")
 
-key = ""
-#endpoint_string = "https://q-n-a.cognitiveservices.azure.com/qnamaker/v4.0" #  westus
-#endpoint_string = https://westus.api.cognitive.microsoft.com
-endpoint_string = "https://q-n-a.cognitiveservices.azure.com"
+key = "grab key from Keys and Endpoint tab in portal resource"
+endpoint_string = "https://qna_resource_name.cognitiveservices.azure.com" 
 
 client = QnAMakerClient(endpoint=endpoint_string, credentials=CognitiveServicesCredentials(key))
 #create_op = client.knowledgebase.create(create_kb_payload=create_kb_dto)  
 #operation = client.operations.get_details(operation_id=operation_id)
-kb_id = ""
+kb_id = "grab from qnamaker.ai, KB, settings, "
 
 update_kb_operation_dto = UpdateKbOperationDTO(add=UpdateKbOperationDTOAdd(
     qna_list=[
