@@ -8,9 +8,9 @@ from msrest.authentication import CognitiveServicesCredentials
 
 import datetime, json, os, time
 
-key = "xx"
+key = "xx" #luis.ai, ap, manage, resource, authoring resource key
 endpoint_string = "https://westus.api.cognitive.microsoft.com/"
-#app_id = "xx"
+#app_id = "xx" # from luis.ai, app, manage, settings
 #endpoint that was published 
 #https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/xx
 
