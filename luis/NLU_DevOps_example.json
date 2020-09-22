@@ -1,0 +1,34 @@
+[
+  {
+    "text": "test utterance here",
+    "intent": "expected intent name here",
+    "entities": [
+      {
+        "entityType": "xxx",
+        "entityValue": {
+          "values": [
+            "yyy, zzz"
+          ]
+        },
+        "matchText": "test utterance here"
+      }
+    ]
+  }
+]
+
+/*
+
+You will need something like appsettings.local.json:
+
+{
+  "luisAppId": "",
+  "luisAuthoringKey": "",
+  "luisAuthoringRegion": "westus",
+  "luisPredictionResourceName": "",
+  "luisEndpointKey": "",
+  "luisEndpointRegion": "southcentralus",
+  "luisSlotName": "production"
+}
+
+
+*/
