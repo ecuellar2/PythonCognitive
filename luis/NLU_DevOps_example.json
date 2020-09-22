@@ -30,5 +30,7 @@ You will need something like appsettings.local.json:
   "luisSlotName": "production"
 }
 
+dotnet nlu test -s luis -u testfilename.json -o test_results1.json
+dotnet nlu compare -e testfilename.json -a test_results1.json
 
 */
