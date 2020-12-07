@@ -59,7 +59,7 @@ print("----------------------------------------------------------------------")
 '''
 results = client.list_incident_root_causes(
     detection_configuration_id=config_id,
-    incident_id="1a6e61b05ad57db7b12debfa3ad94bf8-17601d98000",
+    incident_id="xxx",
 )
 for result in results:
     print("Score: {}".format(result.score))
