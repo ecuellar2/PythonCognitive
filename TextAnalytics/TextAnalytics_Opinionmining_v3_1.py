@@ -22,7 +22,7 @@ def sentiment_analysis_with_opinion_mining_example(client):
     documents = [
         "The food and service were unacceptable, but the restroom was nice"
     ]
-
+    #use begin_analyze() for batch
     result = client.analyze_sentiment(documents, show_opinion_mining=True)
     doc_result = [doc for doc in result if not doc.is_error]
 
